@@ -1,11 +1,18 @@
-import { Event } from "./pages/Event";
+import { ReactElement } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
 
-function App() {
+import { Router } from "./Router";
+import { client } from "./lib/apollo";
+
+const App = (): ReactElement => {
   return (
-    <>
-      <Event />
-    </>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ApolloProvider>
   );
-}
+};
 
 export default App;

@@ -1,1 +1,2 @@
-export * from "./queries/lessons";
+export * from "./queries/getLessons";
+export * from "./queries/getLessonBySlug";

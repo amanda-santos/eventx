@@ -1,4 +1,6 @@
 import { ReactElement } from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import { DefaultUi, Player, Youtube } from "@vime/react";
 import {
   CaretRight,
@@ -7,15 +9,40 @@ import {
   Lightning,
 } from "phosphor-react";
 
+import { GetLessonBySlugResponse, GET_LESSON_BY_SLUG } from "../graphql";
+
 import "@vime/core/themes/default.css";
 
+type Params = {
+  slug: string;
+};
+
 export const Video = (): ReactElement => {
+  const { slug } = useParams<Params>();
+
+  const { data, loading } = useQuery<GetLessonBySlugResponse>(
+    GET_LESSON_BY_SLUG,
+    {
+      variables: {
+        slug,
+      },
+    }
+  );
+
+  if (loading || !data) {
+    return (
+      <div className="flex-1">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1">
       <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video">
           <Player>
-            <Youtube videoId="cUT665tW4v8" />
+            <Youtube videoId={data.lesson.videoId} />
             <DefaultUi />
           </Player>
         </div>
@@ -24,35 +51,24 @@ export const Video = (): ReactElement => {
       <div className="p-8 max-w-[1100px] mx-auto">
         <div className="flex items-start gap-16">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold">
-              Aula 1 - Abertura do Ignite Lab
-            </h1>
+            <h1 className="text-2xl font-bold">{data.lesson.title}</h1>
             <p className="mt-4 text-gray-200 leading-relaxed">
-              Lorem ipsum odor amet, consectetuer adipiscing elit. Ut nullam
-              praesent accumsan mollis fermentum. Netus tristique vivamus
-              ullamcorper interdum natoque dignissim quam mattis nunc. Congue
-              mus integer consectetur sem vivamus magna ut gravida ullamcorper.
-              Elementum leo eget vel dui primis. Leo tempus auctor suscipit
-              class sodales maecenas conubia. Eros ac maximus litora tortor
-              class condimentum torquent. Iaculis aptent ipsum per auctor mus
-              vestibulum. Fusce consectetur senectus nam class tellus potenti
-              placerat. Ridiculus elit eleifend ornare hendrerit massa
-              vestibulum integer cubilia elementum.
+              {data.lesson.description}
             </p>
 
             <div className="flex items-center gap-4 mt-6">
               <img
                 className="h-16 w-16 rounded-full border-2 border-blue-500"
-                src="https://github.com/amanda-santos.png"
-                alt=""
+                src={data.lesson.teacher.avatarURL}
+                alt={data.lesson.teacher.name}
               />
 
               <div className="leading-relaxed">
                 <strong className="font-bold text-2xl block">
-                  Amanda Santos
+                  {data.lesson.teacher.name}
                 </strong>
                 <span className="text-gray-200 text-sm block">
-                  Frontend Developer at Pipefy
+                  {data.lesson.teacher.bio}
                 </span>
               </div>
             </div>

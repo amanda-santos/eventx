@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export type GetLessonsQueryResponse = {
+export type GetLessonsResponse = {
   lessons: {
     id: string;
     title: string;
@@ -10,7 +10,7 @@ export type GetLessonsQueryResponse = {
   }[];
 };
 
-export const GET_LESSONS_QUERY = gql`
+export const GET_LESSONS = gql`
   query {
     lessons(orderBy: availableAt_ASC, stage: PUBLISHED) {
       id
