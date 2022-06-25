@@ -1,10 +1,8 @@
-import { useQuery } from "@apollo/client";
-
-import { GetLessonsResponse, GET_LESSONS } from "../graphql";
+import { useGetLessonsQuery } from "../graphql/generated";
 import { Lesson } from "./Lesson";
 
 export const Sidebar = () => {
-  const { data } = useQuery<GetLessonsResponse>(GET_LESSONS);
+  const { data } = useGetLessonsQuery();
 
   return (
     <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600">
