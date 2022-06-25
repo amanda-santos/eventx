@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Logo } from "../components";
 import { useCreateSubscriberMutation } from "../graphql/generated";
 
+import imgUrl from "../../src/assets/code-mockup.png";
+
 export const Subscribe = (): ReactElement => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -74,7 +76,7 @@ export const Subscribe = (): ReactElement => {
         </div>
       </div>
 
-      <img src="/src/assets/code-mockup.png" alt="React code mockup" />
+      <img src={imgUrl} alt="React code mockup" />
     </div>
   );
 };
