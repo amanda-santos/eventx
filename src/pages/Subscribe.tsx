@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useCreateSubscriberMutation } from "../graphql/generated";
 
 import { Logo } from "../components";
-import codeMockupImg from "../../src/assets/code-mockup.png";
+import codeMockupImg from "../../src/public/assets/code-mockup.png";
 
 export const Subscribe = (): ReactElement => {
   const [name, setName] = useState("");
