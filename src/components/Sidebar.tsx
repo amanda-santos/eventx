@@ -1,12 +1,10 @@
 import classNames from "classnames";
 
 import { useSidebar } from "../contexts/SidebarContext";
-import { useGetLessonsQuery } from "../graphql/generated";
 import { Lesson } from "./Lesson";
 
 export const Sidebar = () => {
-  const { data } = useGetLessonsQuery();
-  const { isSidebarOpen } = useSidebar();
+  const { lessons, isSidebarOpen } = useSidebar();
 
   return (
     <aside
@@ -22,7 +20,7 @@ export const Sidebar = () => {
       </span>
 
       <div className="flex flex-col gap-8">
-        {data?.lessons.map(({ id, title, slug, availableAt, lessonType }) => (
+        {lessons?.map(({ id, title, slug, availableAt, lessonType }) => (
           <Lesson
             key={id}
             title={title}

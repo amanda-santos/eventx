@@ -4,13 +4,16 @@ import { ApolloProvider } from "@apollo/client";
 
 import { Router } from "./Router";
 import { client } from "./lib/apollo";
+import { SidebarProvider } from "./contexts/SidebarContext";
 
 const App = (): ReactElement => {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <SidebarProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </SidebarProvider>
     </ApolloProvider>
   );
 };

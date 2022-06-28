@@ -1,27 +1,31 @@
-import { ReactElement } from "react";
-import { useParams } from "react-router-dom";
+import { ReactElement, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { Header, Sidebar, Video } from "../components";
-import { SidebarProvider } from "../contexts/SidebarContext";
+import { useSidebar } from "../contexts/SidebarContext";
 
 type Params = {
   slug: string;
 };
 
 export const Event = (): ReactElement => {
-  const { slug } = useParams<Params>();
+  const { slug: paramSlug } = useParams<Params>();
+  const { lessons } = useSidebar();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !paramSlug && lessons && navigate(`/event/lesson/${lessons?.[0].slug}`);
+  }, [lessons]);
 
   return (
-    <SidebarProvider>
-      <div className="flex flex-col min-h-screen">
-        <Header />
+    <div className="flex flex-col min-h-screen">
+      <Header />
 
-        <main className="flex flex-1">
-          {slug ? <Video /> : <div className="flex-1" />}
+      <main className="flex flex-1">
+        <Video />
 
-          <Sidebar />
-        </main>
-      </div>
-    </SidebarProvider>
+        <Sidebar />
+      </main>
+    </div>
   );
 };
