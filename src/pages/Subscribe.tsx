@@ -1,10 +1,10 @@
 import { FormEvent, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Logo } from "../components";
 import { useCreateSubscriberMutation } from "../graphql/generated";
 
-import imgUrl from "../../src/assets/code-mockup.png";
+import { Logo } from "../components";
+import codeMockupImg from "../../src/assets/code-mockup.png";
 
 export const Subscribe = (): ReactElement => {
   const [name, setName] = useState("");
@@ -35,8 +35,8 @@ export const Subscribe = (): ReactElement => {
 
           <h1 className="mt-8 text-[2.5rem] leading-tight">
             Build a{" "}
-            <strong className="text-blue-500">complete application</strong> from
-            scratch with <strong className="text-blue-500">React</strong>
+            <strong className="text-pink-300">complete application</strong> from
+            scratch with <strong className="text-pink-300">React</strong>
           </h1>
           <p className="mt-4 text-gray-200 leading-relaxed">
             In just one week you will master in practice one of the most used
@@ -68,7 +68,7 @@ export const Subscribe = (): ReactElement => {
             <button
               type="submit"
               disabled={loading}
-              className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
+              className="mt-4 bg-pink-500 uppercase py-4 rounded font-bold text-sm hover:bg-pink-700 transition-colors disabled:opacity-50"
             >
               Secure my spot
             </button>
@@ -76,7 +76,7 @@ export const Subscribe = (): ReactElement => {
         </div>
       </div>
 
-      <img src={imgUrl} alt="React code mockup" />
+      <img src={codeMockupImg} alt="React code mockup" />
     </div>
   );
 };

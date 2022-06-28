@@ -31,12 +31,11 @@ export const Lesson = ({
       <span className="text-gray-300">{formattedAvailableAt}</span>
 
       <div
-        className={classNames(
-          "rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500",
-          {
-            "bg-green-500": isActiveLesson,
-          }
-        )}
+        className={classNames("rounded border border-gray-500 p-4 mt-2 ", {
+          "group-hover:border-blue-500": !isActiveLesson,
+          "group-hover:border-pink-500": isActiveLesson,
+          "bg-pink-500": isActiveLesson,
+        })}
       >
         <header className="flex items-center justify-between">
           {isLessonAvailable ? (
@@ -53,7 +52,7 @@ export const Lesson = ({
               Available
             </span>
           ) : (
-            <span className="text-sm text-orange-500 font-medium flex items-center gap-2">
+            <span className="text-sm text-pink-300 font-medium flex items-center gap-2">
               <Lock size={20} />
               Soon
             </span>
@@ -64,7 +63,7 @@ export const Lesson = ({
               "text-xs rounded px-2 py-[0.125rem] text-white border font-bold",
               {
                 "border-white": isActiveLesson,
-                "border-green-300": !isActiveLesson,
+                "border-blue-500": !isActiveLesson,
               }
             )}
           >
