@@ -1,11 +1,22 @@
+import classNames from "classnames";
+
+import { useSidebar } from "../contexts/SidebarContext";
 import { useGetLessonsQuery } from "../graphql/generated";
 import { Lesson } from "./Lesson";
 
 export const Sidebar = () => {
   const { data } = useGetLessonsQuery();
+  const { isSidebarOpen } = useSidebar();
 
   return (
-    <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600">
+    <aside
+      className={classNames(
+        "lg:block w-full lg:w-[348px] bg-gray-700 p-6 border-l border-gray-600",
+        {
+          hidden: !isSidebarOpen,
+        }
+      )}
+    >
       <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">
         Classes schedule
       </span>

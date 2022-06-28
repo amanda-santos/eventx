@@ -4,6 +4,8 @@ import { format, isPast } from "date-fns";
 import { CheckCircle, Lock } from "phosphor-react";
 import classNames from "classnames";
 
+import { useSidebar } from "../contexts/SidebarContext";
+
 type LessonProps = {
   title: string;
   slug: string;
@@ -18,6 +20,7 @@ export const Lesson = ({
   type,
 }: LessonProps): ReactElement => {
   const { slug: urlSlug } = useParams<{ slug: string }>();
+  const { setIsSidebarOpen } = useSidebar();
   const isActiveLesson = slug === urlSlug;
 
   const isLessonAvailable = isPast(availableAt);
@@ -26,8 +29,17 @@ export const Lesson = ({
     "EEEE' • 'MMMM do' • 'h':'mm aaa"
   );
 
+  const handleLessonClick = (slug: LessonProps["slug"]) => {
+    setIsSidebarOpen(false);
+    history.pushState({}, "", `/event/lesson/${slug}`);
+  };
+
   return (
-    <Link to={`/event/lesson/${slug}`} className="group">
+    <Link
+      to={`/event/lesson/${slug}`}
+      onClick={() => handleLessonClick(slug)}
+      className="group"
+    >
       <span className="text-gray-300">{formattedAvailableAt}</span>
 
       <div

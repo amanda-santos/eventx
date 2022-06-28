@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { useParams } from "react-router-dom";
 import { DefaultUi, Player, Youtube } from "@vime/react";
+import classNames from "classnames";
 import {
   CaretRight,
   DiscordLogo,
@@ -9,6 +10,7 @@ import {
 } from "phosphor-react";
 
 import { useGetLessonBySlugQuery } from "../graphql/generated";
+import { useSidebar } from "../contexts/SidebarContext";
 
 import "@vime/core/themes/default.css";
 
@@ -18,6 +20,7 @@ type Params = {
 
 export const Video = (): ReactElement => {
   const { slug } = useParams<Params>();
+  const { isSidebarOpen } = useSidebar();
 
   const { data, loading } = useGetLessonBySlugQuery({
     variables: {
@@ -34,7 +37,11 @@ export const Video = (): ReactElement => {
   }
 
   return (
-    <div className="flex-1">
+    <div
+      className={classNames("flex-1", {
+        hidden: isSidebarOpen,
+      })}
+    >
       <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video">
           <Player>
@@ -45,7 +52,7 @@ export const Video = (): ReactElement => {
       </div>
 
       <div className="p-8 max-w-[1100px] mx-auto">
-        <div className="flex items-start gap-16">
+        <div className="flex flex-col lg:flex-row items-start gap-16">
           <div className="flex-1">
             <h1 className="text-2xl font-bold">{data.lesson.title}</h1>
             <p className="mt-4 text-gray-200 leading-relaxed">
@@ -72,7 +79,7 @@ export const Video = (): ReactElement => {
             )}
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-full lg:w-60">
             <a
               href=""
               className="p-4 text-sm bg-pink-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-pink-700 transition-colors"
@@ -91,7 +98,7 @@ export const Video = (): ReactElement => {
           </div>
         </div>
 
-        <div className="gap-8 mt-20 grid grid-cols-2">
+        <div className="gap-8 mt-20 grid grid-cols-1 lg:grid-cols-2">
           <a
             href=""
             className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors"
