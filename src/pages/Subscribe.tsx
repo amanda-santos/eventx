@@ -39,14 +39,16 @@ export const Subscribe = (): ReactElement => {
             <strong className="text-pink-300">online events</strong>
           </h1>
           <p className="mt-4 text-gray-200 leading-relaxed">
-            In just one week you will master in practice one of the most used
-            technologies and with high demand to access the best opportunities
-            on the market.
+            Your best platform to host your online tech events. Here you'll be
+            able to add live and recorded lessons with your videos and a
+            customized schedule.
           </p>
         </div>
 
         <div className="p-8 bg-gray-700 lg:border lg:border-gray-500 rounded mt-12 w-full">
-          <strong className="text-2xl mb-6 block">Subscribe for free</strong>
+          <strong className="text-2xl mb-6 block">
+            Subscribe to see a live example
+          </strong>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full">
             <input
