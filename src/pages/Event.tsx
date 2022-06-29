@@ -23,7 +23,6 @@ export const Event = (): ReactElement => {
 
       <main className="flex flex-1">
         <Video />
-
         <Sidebar />
       </main>
     </div>

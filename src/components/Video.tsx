@@ -2,17 +2,11 @@ import { ReactElement } from "react";
 import { useParams } from "react-router-dom";
 import { DefaultUi, Player, Youtube } from "@vime/react";
 import classNames from "classnames";
-import {
-  CaretRight,
-  CircleNotch,
-  DiscordLogo,
-  FileArrowDown,
-  Lightning,
-  Spinner,
-} from "phosphor-react";
+import { CircleNotch, DiscordLogo, Lightning } from "phosphor-react";
 
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 import { useSidebar } from "../contexts/SidebarContext";
+import { HelpLink } from "./HelpLink";
 
 import "@vime/core/themes/default.css";
 
@@ -106,43 +100,17 @@ export const Video = (): ReactElement => {
         </div>
 
         <div className="gap-8 mt-20 grid grid-cols-1 lg:grid-cols-2">
-          <a
-            href=""
-            className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors"
-          >
-            <div className="bg-pink-700 h-full p-6 flex items-center">
-              <FileArrowDown size={40} />
-            </div>
-            <div className="py-6 leading-relaxed">
-              <strong className="text-2xl">Complementary Material</strong>
-              <p className="text-sm text-gray-200 mt-2">
-                Lorem ipsum odor amet, consectetuer adipiscing elit. Ut nullam
-                praesent accumsan mollis fermentum.
-              </p>
-            </div>
-            <div className="h-full p-6 flex items-center">
-              <CaretRight size={24} />
-            </div>
-          </a>
+          <HelpLink
+            title="Complementary Material"
+            description="Lorem ipsum odor amet, consectetuer adipiscing elit. Ut nullam
+                praesent accumsan mollis fermentum."
+          />
 
-          <a
-            href=""
-            className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors"
-          >
-            <div className="bg-pink-700 h-full p-6 flex items-center">
-              <FileArrowDown size={40} />
-            </div>
-            <div className="py-6 leading-relaxed">
-              <strong className="text-2xl">Wallpapers</strong>
-              <p className="text-sm text-gray-200 mt-2">
-                Lorem ipsum odor amet, consectetuer adipiscing elit. Ut nullam
-                praesent accumsan mollis fermentum.
-              </p>
-            </div>
-            <div className="h-full p-6 flex items-center">
-              <CaretRight size={24} />
-            </div>
-          </a>
+          <HelpLink
+            title="Wallpapers"
+            description="Lorem ipsum odor amet, consectetuer adipiscing elit. Ut nullam
+                praesent accumsan mollis fermentum."
+          />
         </div>
       </div>
     </div>
