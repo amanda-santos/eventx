@@ -4,9 +4,11 @@ import { DefaultUi, Player, Youtube } from "@vime/react";
 import classNames from "classnames";
 import {
   CaretRight,
+  CircleNotch,
   DiscordLogo,
   FileArrowDown,
   Lightning,
+  Spinner,
 } from "phosphor-react";
 
 import { useGetLessonBySlugQuery } from "../graphql/generated";
@@ -31,7 +33,12 @@ export const Video = (): ReactElement => {
   if (loading || !data?.lesson) {
     return (
       <div className="flex-1">
-        <p>Loading...</p>
+        <span className="flex items-center justify-center h-screen text-xl">
+          <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+            <CircleNotch size={24} />
+          </svg>
+          <p className="">Loading...</p>
+        </span>
       </div>
     );
   }
