@@ -26,7 +26,7 @@ export const Lesson = ({
   const isLessonAvailable = isPast(availableAt);
   const formattedAvailableAt = format(
     availableAt,
-    "EEEE' • 'MMMM do' • 'h':'mm aaa"
+    "EEEE' • 'MMMM do' • 'h':'mmaaa"
   );
 
   const handleLessonClick = (slug: LessonProps["slug"]) => {
@@ -44,9 +44,10 @@ export const Lesson = ({
 
       <div
         className={classNames("rounded border border-gray-500 p-4 mt-2 ", {
-          "group-hover:border-blue-500": !isActiveLesson,
-          "group-hover:border-pink-500": isActiveLesson,
-          "bg-pink-500": isActiveLesson,
+          "group-hover:border-blue-500": isLessonAvailable,
+          "group-hover:border-pink-500": !isLessonAvailable,
+          "bg-pink-500": isActiveLesson && !isLessonAvailable,
+          "bg-blue-700": isActiveLesson && isLessonAvailable,
         })}
       >
         <header className="flex items-center justify-between">
@@ -64,7 +65,15 @@ export const Lesson = ({
               Available
             </span>
           ) : (
-            <span className="text-sm text-pink-300 font-medium flex items-center gap-2">
+            <span
+              className={classNames(
+                "text-sm font-medium flex items-center gap-2",
+                {
+                  "text-white": isActiveLesson,
+                  "text-pink-300": !isActiveLesson,
+                }
+              )}
+            >
               <Lock size={20} />
               Soon
             </span>
@@ -75,7 +84,8 @@ export const Lesson = ({
               "text-xs rounded px-2 py-[0.125rem] text-white border font-bold",
               {
                 "border-white": isActiveLesson,
-                "border-blue-500": !isActiveLesson,
+                "border-blue-500": !isActiveLesson && isLessonAvailable,
+                "border-pink-500": !isActiveLesson && !isLessonAvailable,
               }
             )}
           >

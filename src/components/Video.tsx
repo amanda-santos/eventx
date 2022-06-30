@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DefaultUi, Player, Youtube } from "@vime/react";
 import classNames from "classnames";
@@ -9,6 +9,8 @@ import { useSidebar } from "../contexts/SidebarContext";
 import { HelpLink } from "./HelpLink";
 
 import "@vime/core/themes/default.css";
+import { isPast } from "date-fns";
+import { SimpleText } from "./SImpleText";
 
 type Params = {
   slug: string;
@@ -16,24 +18,46 @@ type Params = {
 
 export const Video = (): ReactElement => {
   const { slug } = useParams<Params>();
-  const { isSidebarOpen } = useSidebar();
-
   const { data, loading } = useGetLessonBySlugQuery({
     variables: {
       slug,
     },
   });
 
+  const { isSidebarOpen } = useSidebar();
+  const [isLessonAvailable, setIsLessonAvailable] = useState(false);
+
+  useEffect(() => {
+    data?.lesson &&
+      setIsLessonAvailable(isPast(new Date(data.lesson?.availableAt)));
+  }, [data]);
+
   if (loading || !data?.lesson) {
     return (
-      <div className="flex-1">
-        <span className="flex items-center justify-center h-screen text-xl">
+      <SimpleText
+        className={classNames({
+          hidden: isSidebarOpen,
+        })}
+      >
+        <>
           <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
             <CircleNotch size={24} />
           </svg>
           <p className="">Loading...</p>
-        </span>
-      </div>
+        </>
+      </SimpleText>
+    );
+  }
+
+  if (!isLessonAvailable) {
+    return (
+      <SimpleText
+        className={classNames({
+          hidden: isSidebarOpen,
+        })}
+      >
+        <p className="">😢 Sorry, this lesson isn't available yet.</p>
+      </SimpleText>
     );
   }
 
@@ -82,7 +106,8 @@ export const Video = (): ReactElement => {
 
           <div className="flex flex-col gap-4 w-full lg:w-60">
             <a
-              href=""
+              href="https://discord.com/"
+              target="_blank"
               className="p-4 text-sm bg-pink-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-pink-700 transition-colors"
             >
               <DiscordLogo size={24} />
@@ -90,7 +115,8 @@ export const Video = (): ReactElement => {
             </a>
 
             <a
-              href=""
+              href={data?.lesson?.challenge?.url}
+              target="_blank"
               className="p-4 text-sm border border-blue-500 text-blue-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-blue-500 hover:text-gray-900 transition-colors"
             >
               <Lightning size={24} />
