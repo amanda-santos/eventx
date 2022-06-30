@@ -28,7 +28,11 @@
 
 ## 📝 About the project
 
-<p>EventX is a platform to help you publish and manage your events, adding lessons with videos, publishing date, subscription, etc. Developed during Ignite Lab (Rocketseat).</p>
+<p>EventX is a platform to help you publish and manage your events, adding lessons with videos, publishing date, subscription, etc. Fully responsive.
+
+Access here: https://eventx.vercel.app/
+
+Developed during Ignite Lab (Rocketseat) 💜</p>
 
 ## 👩🏻‍💻 Technologies
 
@@ -49,7 +53,9 @@ Technologies used to develop this project:
 
 ## 🖥 Preview
 
+https://user-images.githubusercontent.com/49074930/176568875-caa7accd-62d8-497a-884c-4c9c1fb74a7d.mp4
 
+https://user-images.githubusercontent.com/49074930/176568928-47550a64-3d84-4fda-9fde-a2203a739c2d.mp4
 
 ## 🤔 How to contribute
 
