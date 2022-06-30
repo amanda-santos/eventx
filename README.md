@@ -45,6 +45,7 @@ Technologies used to develop this project:
 - GraphQL CodeGen
 - Apollo GraphQL
 - TailwindCSS
+- VimeJS
 
 ## ⌨ Getting started
 
